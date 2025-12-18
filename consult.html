@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consult a Doctor - GenMed</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Logo -->
+    <div class="bg-logo"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">GenMed</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="consult.html" class="active">Consult a Doctor</a></li>
+                    <li><a href="customers.html">Our Customers</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="profile.html" class="profile-link"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Consult Page Content -->
+    <main class="container">
+        <div class="page-header">
+            <h1>Consult a Doctor</h1>
+            <p class="page-subtitle">Connect with certified healthcare professionals online</p>
+        </div>
+
+        <!-- Doctor Cards -->
+        <section class="doctors-section">
+            <div class="doctor-cards">
+                <!-- Doctor 1 -->
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Dr. Sharma">
+                        <div class="doctor-status online"></div>
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Rajesh Sharma</h3>
+                        <p class="doctor-specialty">General Physician</p>
+                        <p class="doctor-exp">15+ years experience</p>
+                        <div class="doctor-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.7/5</span>
+                        </div>
+                        <p class="doctor-desc">Specialized in internal medicine and chronic disease management</p>
+                        <div class="consult-fee">
+                            <span class="fee">Consultation Fee: ₹500</span>
+                        </div>
+                        <button class="contact-btn" id="contactDoctor1">
+                            <i class="fas fa-phone-alt"></i> Contact Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Doctor 2 -->
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Dr. Patel">
+                        <div class="doctor-status online"></div>
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Priya Patel</h3>
+                        <p class="doctor-specialty">Cardiologist</p>
+                        <p class="doctor-exp">12+ years experience</p>
+                        <div class="doctor-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0/5</span>
+                        </div>
+                        <p class="doctor-desc">Expert in heart health, hypertension, and cardiovascular diseases</p>
+                        <div class="consult-fee">
+                            <span class="fee">Consultation Fee: ₹800</span>
+                        </div>
+                        <button class="contact-btn" id="contactDoctor2">
+                            <i class="fas fa-phone-alt"></i> Contact Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Doctor 3 -->
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Dr. Verma">
+                        <div class="doctor-status offline"></div>
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Amit Verma</h3>
+                        <p class="doctor-specialty">Pediatrician</p>
+                        <p class="doctor-exp">18+ years experience</p>
+                        <div class="doctor-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.6/5</span>
+                        </div>
+                        <p class="doctor-desc">Specialized in child healthcare and developmental disorders</p>
+                        <div class="consult-fee">
+                            <span class="fee">Consultation Fee: ₹600</span>
+                        </div>
+                        <button class="contact-btn" id="contactDoctor3">
+                            <i class="fas fa-phone-alt"></i> Contact Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Consultation Info -->
+        <section class="consultation-info">
+            <h2>How Online Consultation Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Choose a Doctor</h3>
+                    <p>Select from our panel of certified doctors based on specialty, availability, and ratings</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Book Appointment</h3>
+                    <p>Select convenient date and time for video or audio consultation</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Connect & Consult</h3>
+                    <p>Join the consultation at scheduled time via our secure platform</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Receive Prescription</h3>
+                    <p>Get digital prescription and medical advice after consultation</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back to Home -->
+        <div class="back-home">
+            <a href="index.html" class="btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">GenMed</div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="consult.html">Consult Doctor</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="footer-disclaimer">
+                    <p><i class="fas fa-exclamation-circle"></i> For emergencies, please visit the nearest hospital or call emergency services.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 GenMed. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

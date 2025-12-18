@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Medicine - GenMed</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Logo -->
+    <div class="bg-logo"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">GenMed</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="consult.html">Consult a Doctor</a></li>
+                    <li><a href="customers.html">Our Customers</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="profile.html" class="profile-link"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Page Content -->
+    <main class="container">
+        <div class="search-header">
+            <h1>Search Medicine</h1>
+            <div class="search-bar">
+                <input type="text" id="medicineSearch" placeholder="Enter medicine name (e.g., Crocin, Dolo 650)...">
+                <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+
+        <!-- Demo Medicine Results -->
+        <section class="medicine-results">
+            <div class="result-container">
+                <!-- Original Medicine -->
+                <div class="original-medicine">
+                    <h3>Original Medicine</h3>
+                    <div class="medicine-info">
+                        <div class="medicine-image">
+                            <img src="Crocin advance.png" alt="Crocin Advance 650mg">
+                        </div>
+                            <div class="medicine-name">Crocin Advance 650mg</div>
+                        </div>
+                        <div class="composition">
+                            <h4>Composition</h4>
+                            <ul>
+                                <li>Paracetamol: 650mg</li>
+                                <li>Caffeine: 50mg</li>
+                            </ul>
+                            <div class="price-tag">Price: ₹45</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generic Alternatives -->
+                <div class="generic-alternatives">
+                    <h3>Generic Alternatives</h3>
+                    <div class="alternatives-list">
+                        <!-- Alternative 1 -->
+                        <div class="alternative-card">
+                            <div class="alt-image">
+                                <img src="paracetamol.jpg" alt="Paracetamol 650">
+                            </div>
+                            <div class="alt-details">
+                                <h4>Paracetamol 650mg</h4>
+                                <p>Composition: Paracetamol 650mg</p>
+                                <div class="similarity">
+                                    <div class="similarity-bar">
+                                        <div class="similarity-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span>85% Similar</span>
+                                </div>
+                                <div class="alt-price">₹15</div>
+                                <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <!-- Alternative 2 -->
+                        <div class="alternative-card">
+                            <div class="alt-image">
+                                <img src="dolo.webp" alt="Dolo 650">
+                            </div>
+                            <div class="alt-details">
+                                <h4>Dolo 650mg</h4>
+                                <p>Composition: Paracetamol 650mg</p>
+                                <div class="similarity">
+                                    <div class="similarity-bar">
+                                        <div class="similarity-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span>85% Similar</span>
+                                </div>
+                                <div class="alt-price">₹25</div>
+                                <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <!-- Alternative 3 -->
+                        <div class="alternative-card">
+                            <div class="alt-image">
+                                <img src="P650.avif" alt="P 650">
+                            </div>
+                            <div class="alt-details">
+                                <h4>P 650</h4>
+                                <p>Composition: Paracetamol 650mg</p>
+                                <div class="similarity">
+                                    <div class="similarity-bar">
+                                        <div class="similarity-fill" style="width: 100%"></div>
+                                    </div>
+                                    <span>100% Similar</span>
+                                </div>
+                                <div class="alt-price">₹12</div>
+                                <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <!-- Alternative 4 -->
+                        <div class="alternative-card">
+                            <div class="alt-image">
+                                <img src="CALPOL.png" alt="Calpol 650">
+                            </div>
+                            <div class="alt-details">
+                                <h4>Calpol 650mg</h4>
+                                <p>Composition: Paracetamol 650mg</p>
+                                <div class="similarity">
+                                    <div class="similarity-bar">
+                                        <div class="similarity-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span>85% Similar</span>
+                                </div>
+                                <div class="alt-price">₹30</div>
+                                <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Similarity Graph -->
+            <div class="similarity-graph">
+                <h3>Similarity Comparison</h3>
+                <div class="graph-container">
+                    <canvas id="similarityChart"></canvas>
+                </div>
+                <div class="graph-legend">
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #1AB78C;"></span>
+                        <span>Active Ingredient Match</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #0958D8;"></span>
+                        <span>Additional Ingredients</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back to Home -->
+        <div class="back-home">
+            <a href="index.html" class="btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">GenMed</div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="consult.html">Consult Doctor</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="footer-disclaimer">
+                    <p><i class="fas fa-exclamation-circle"></i> Disclaimer: Generic alternatives may have different inactive ingredients. Consult your doctor before switching.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 GenMed. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

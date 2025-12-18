@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenMed Finder: Bridging the Generic Medicine Awareness Gap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-green: #1AB78C;
+            --primary-blue: #0958D8;
+            --white: #ffffff;
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+            --gray-text: #64748b;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slides-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .slide {
+            min-width: 100vw;
+            height: 100vh;
+            padding: 40px 60px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-green);
+        }
+        
+        .slide-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+        }
+        
+        .slide-logo span {
+            color: var(--primary-green);
+        }
+        
+        .slide-number {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .slide-title {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+        
+        .slide-title span {
+            color: var(--primary-green);
+        }
+        
+        .slide-subtitle {
+            font-size: 1.4rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .content-row {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .content-col {
+            flex: 1;
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .stat-box {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1;
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid var(--primary-blue);
+        }
+        
+        .stat-box.green {
+            border-top-color: var(--primary-green);
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+        
+        .stat-box.green .stat-value {
+            color: var(--primary-green);
+        }
+        
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            line-height: 1.4;
+        }
+        
+        .chart-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chart-title {
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .chart {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 10px;
+        }
+        
+        .bar {
+            width: 40px;
+            background-color: var(--primary-blue);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: height 0.5s ease;
+        }
+        
+        .bar.green {
+            background-color: var(--primary-green);
+        }
+        
+        .bar-label {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            white-space: nowrap;
+        }
+        
+        .bar-value {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .bar.green .bar-value {
+            color: var(--primary-green);
+        }
+        
+        .image-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+        
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            background-color: #e2e8f0;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-text);
+        }
+        
+        .placeholder-img i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary-green);
+        }
+        
+        .list-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .list-title {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .list-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .list-item i {
+            color: var(--primary-green);
+            margin-top: 3px;
+        }
+        
+        .list-text {
+            line-height: 1.5;
+        }
+        
+        .list-text strong {
+            color: var(--primary-blue);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(26, 183, 140, 0.1) 0%, rgba(9, 88, 216, 0.1) 100%);
+            border-left: 5px solid var(--primary-green);
+            padding: 25px;
+            border-radius: 0 10px 10px 0;
+            margin-top: 20px;
+        }
+        
+        .highlight-text {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--gray-text);
+            padding: 20px 30px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .quote:before {
+            content: "“";
+            font-size: 4rem;
+            color: var(--primary-green);
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            opacity: 0.5;
+        }
+        
+        .quote:after {
+            content: "”";
+            font-size: 4rem;
+            color: var(--primary-green);
+            position: absolute;
+            bottom: -30px;
+            right: 15px;
+            opacity: 0.5;
+        }
+        
+        .workflow-diagram {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .workflow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+        
+        .workflow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+        
+        .step-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .step-circle.green {
+            background-color: var(--primary-green);
+        }
+        
+        .step-label {
+            font-weight: 600;
+            color: var(--dark-text);
+            text-align: center;
+            max-width: 120px;
+        }
+        
+        .workflow-line {
+            position: absolute;
+            top: 30px;
+            left: 70px;
+            right: 70px;
+            height: 4px;
+            background-color: #e2e8f0;
+            z-index: 1;
+        }
+        
+        .workflow-line:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background-color: var(--primary-green);
+            transition: width 1s ease;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background-color: var(--primary-green);
+            transform: translateY(-3px);
+        }
+        
+        .slide-indicators {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background-color: var(--primary-blue);
+            transform: scale(1.2);
+        }
+        
+        .indicator:hover {
+            background-color: var(--primary-green);
+        }
+        
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--gray-text);
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        /* Slide-specific styles */
+        .title-slide {
+            background: linear-gradient(135deg, rgba(9, 88, 216, 0.9) 0%, rgba(26, 183, 140, 0.9) 100%);
+            color: var(--white);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .title-slide .slide-title {
+            color: var(--white);
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .title-slide .slide-subtitle {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+        }
+        
+        .title-logo {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .title-logo span:first-child {
+            color: var(--white);
+        }
+        
+        .title-logo span:last-child {
+            color: #f0f9ff;
+        }
+        
+        .domain-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            margin-top: 30px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .team-name {
+            margin-top: 30px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .slide {
+                padding: 30px 40px;
+            }
+            
+            .slide-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .content-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .chart-container, .image-container, .workflow-diagram {
+                height: 250px;
+            }
+            
+            .workflow-steps {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 30px;
+            }
+            
+            .workflow-line {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px 25px;
+            }
+            
+            .slide-title {
+                font-size: 1.8rem;
+            }
+            
+            .title-slide .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            .title-slide .slide-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .stat-box {
+                min-width: 140px;
+            }
+            
+            .stat-value {
+                font-size: 1.8rem;
+            }
+            
+            .navigation {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .slide-indicators {
+                bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slides-container" id="slides-container">
+            <!-- Slide 1: Title Slide -->
+            <div class="slide title-slide">
+                <div class="slide-content" style="align-items: center;">
+                    <div class="title-logo">
+                        <span>GenMed</span>
+                        <span>Finder</span>
+                    </div>
+                    <h1 class="slide-title">Empowering Affordable Healthcare Choices</h1>
+                    <div class="slide-subtitle">Bridging the Generic Medicine Awareness Gap</div>
+                    <div class="content-row" style="max-width: 800px; margin-top: 40px;">
+                        <div class="content-col" style="text-align: center;">
+                            <div class="domain-badge">Healthcare Technology</div>
+                            <div class="team-name">Team: MedTech Innovators</div>
+                        </div>
+                    </div>
+                    <div class="footer" style="color: rgba(255,255,255,0.8); margin-top: 60px;">
+                        Submitted for: National Healthcare Ideathon 2023
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2: The Indian Pharmaceutical Landscape -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">2</div>
+                </div>
+                
+                <h2 class="slide-title">The Indian Pharmaceutical <span>Landscape</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <div class="list-container">
+                                <h3 class="list-title">Market Overview</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-globe-asia"></i>
+                                    <div class="list-text"><strong>Global Position:</strong> India is the world's largest provider of generic medicines</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-shipping-fast"></i>
+                                    <div class="list-text"><strong>Export Dominance:</strong> Supplies 40% of US generic medicines and 90% of global antiretrovirals</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-industry"></i>
+                                    <div class="list-text"><strong>Market Size:</strong> 20,000+ registered pharmaceutical units</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-award"></i>
+                                    <div class="list-text"><strong>Quality Standards:</strong> 97% of medicines meet quality standards (both generic and branded)</div>
+                                </div>
+                            </div>
+                            
+                            <div class="highlight-box">
+                                <div class="highlight-text">Despite being the "pharmacy of the world," Indian citizens face high out-of-pocket healthcare expenditure and limited access to affordable medicines.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <div class="image-container">
+                                <div class="placeholder-img">
+                                    <i class="fas fa-pills"></i>
+                                    <p>India - Pharmacy of the World</p>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-container">
+                                <h3 class="chart-title">Global Generic Medicine Supply</h3>
+                                <div class="chart">
+                                    <div class="bar green" style="height: 90%;">
+                                        <div class="bar-label">Antiretrovirals</div>
+                                        <div class="bar-value">90%</div>
+                                    </div>
+                                    <div class="bar" style="height: 40%;">
+                                        <div class="bar-label">US Generics</div>
+                                        <div class="bar-value">40%</div>
+                                    </div>
+                                    <div class="bar green" style="height: 70%;">
+                                        <div class="bar-label">Vaccines</div>
+                                        <div class="bar-value">70%</div>
+                                    </div>
+                                    <div class="bar" style="height: 60%;">
+                                        <div class="bar-label">Global Supply</div>
+                                        <div class="bar-value">60%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3: The Crisis - By The Numbers -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">3</div>
+                </div>
+                
+                <h2 class="slide-title">The Crisis - <span>By The Numbers</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Financial Burden</h3>
+                            <div class="stats-container">
+                                <div class="stat-box">
+                                    <div class="stat-value">67%</div>
+                                    <div class="stat-label">of total healthcare OOP spending goes to medicines</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">38M</div>
+                                    <div class="stat-label">individuals pushed into poverty due to medicine costs annually</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">94M</div>
+                                    <div class="stat-label">Indians below poverty line due to medical expenses</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">29M</div>
+                                    <div class="stat-label">households face catastrophic expenditure from medicine purchases</div>
+                                </div>
+                            </div>
+                            
+                            <h3 class="slide-subtitle" style="margin-top: 30px;">Price Disparity</h3>
+                            <div class="stats-container">
+                                <div class="stat-box">
+                                    <div class="stat-value">80-85%</div>
+                                    <div class="stat-label">Less cost for generic medicines vs branded alternatives</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">5.2-46.4x</div>
+                                    <div class="stat-label">Price variations between different brands of same medicine</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <div class="chart-container">
+                                <h3 class="chart-title">Medicine Cost as % of Healthcare OOP</h3>
+                                <div class="chart">
+                                    <div class="bar" style="height: 67%;">
+                                        <div class="bar-label">India</div>
+                                        <div class="bar-value">67%</div>
+                                    </div>
+                                    <div class="bar green" style="height: 30%;">
+                                        <div class="bar-label">USA</div>
+                                        <div class="bar-value">30%</div>
+                                    </div>
+                                    <div class="bar" style="height: 35%;">
+                                        <div class="bar-label">UK</div>
+                                        <div class="bar-value">35%</div>
+                                    </div>
+                                    <div class="bar green" style="height: 45%;">
+                                        <div class="bar-label">China</div>
+                                        <div class="bar-value">45%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-container" style="margin-top: 20px;">
+                                <h3 class="chart-title">Days of Work Needed to Afford Prescribed Medicines</h3>
+                                <div class="chart">
+                                    <div class="bar" style="height: 100%;">
+                                        <div class="bar-label">Low Income</div>
+                                        <div class="bar-value">17 days</div>
+                                    </div>
+                                    <div class="bar green" style="height: 70%;">
+                                        <div class="bar-label">Middle Income</div>
+                                        <div class="bar-value">12 days</div>
+                                    </div>
+                                    <div class="bar" style="height: 40%;">
+                                        <div class="bar-label">Urban Worker</div>
+                                        <div class="bar-value">7 days</div>
+                                    </div>
+                                    <div class="bar green" style="height: 10%;">
+                                        <div class="bar-label">High Income</div>
+                                        <div class="bar-value">1 day</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4: The Root Problems -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">4</div>
+                </div>
+                
+                <h2 class="slide-title">The <span>Root Problems</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <div class="list-container">
+                                <h3 class="list-title">1. Knowledge Gap</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <div class="list-text"><strong>61%</strong> of patients believe generic medicines have lower quality than branded medicines</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <div class="list-text"><strong>75%</strong> of patients unaware of Jan Aushadhi scheme</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <div class="list-text">Only <strong>3%</strong> of medicines are actually substandard (affects both generic and branded equally)</div>
+                                </div>
+                            </div>
+                            
+                            <div class="list-container" style="margin-top: 20px;">
+                                <h3 class="list-title">2. Prescription Practices</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-prescription"></i>
+                                    <div class="list-text">Only <strong>5.82%</strong> generic prescribing rate in India (vs 84.6% in USA, 86.1% in Brazil)</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-user-md"></i>
+                                    <div class="list-text"><strong>16.66%</strong> of doctors actually prescribe generic medicines despite 100% awareness</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-handshake"></i>
+                                    <div class="list-text">Doctors influenced by pharmaceutical company branding and relationships</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <div class="list-container">
+                                <h3 class="list-title">3. Accessibility Issues</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-store"></i>
+                                    <div class="list-text">Limited availability of generic medicines</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div class="list-text">Only <strong>230 Jan Aushadhi stores</strong> expanded slowly</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <div class="list-text">Retailer profit margins exceeding <strong>68%</strong> on branded medicines</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-info-circle"></i>
+                                    <div class="list-text">Information asymmetry between healthcare providers and patients</div>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-container" style="margin-top: 20px; height: 250px;">
+                                <h3 class="chart-title">Generic Prescribing Rates Comparison</h3>
+                                <div class="chart">
+                                    <div class="bar" style="height: 10%;">
+                                        <div class="bar-label">India</div>
+                                        <div class="bar-value">5.82%</div>
+                                    </div>
+                                    <div class="bar green" style="height: 85%;">
+                                        <div class="bar-label">USA</div>
+                                        <div class="bar-value">84.6%</div>
+                                    </div>
+                                    <div class="bar" style="height: 86%;">
+                                        <div class="bar-label">Brazil</div>
+                                        <div class="bar-value">86.1%</div>
+                                    </div>
+                                    <div class="bar green" style="height: 70%;">
+                                        <div class="bar-label">UK</div>
+                                        <div class="bar-value">70.3%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 5: Target Segment Analysis -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">5</div>
+                </div>
+                
+                <h2 class="slide-title">Target Segment <span>Analysis</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Bangalore Middle Class - The Focus</h3>
+                            
+                            <div class="list-container">
+                                <h3 class="list-title">Why Bangalore?</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div class="list-text">High healthcare awareness but low generic medicine adoption</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div class="list-text">Growing middle-class population with smartphone penetration</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div class="list-text">Significant healthcare expenditure burden</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div class="list-text">Multiple Jan Aushadhi stores and generic pharmacies available</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Consumer Behavior Insights</h3>
+                            
+                            <div class="stats-container">
+                                <div class="stat-box">
+                                    <div class="stat-value">96%</div>
+                                    <div class="stat-label">patients trust physician recommendations</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">85%</div>
+                                    <div class="stat-label">consider medication cost as significant factor</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">79.78%</div>
+                                    <div class="stat-label">satisfaction rate with generic medicines once tried</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">46.81%</div>
+                                    <div class="stat-label">self-substitute without proper knowledge</div>
+                                </div>
+                            </div>
+                            
+                            <div class="highlight-box">
+                                <div class="highlight-text">Majority of medicine purchase decisions made through doctor's advice. Lack of awareness about generic alternatives at point of prescription.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-row">
+                        <div class="content-col">
+                            <div class="image-container">
+                                <div class="placeholder-img">
+                                    <i class="fas fa-city"></i>
+                                    <p>Bangalore - Tech hub with high healthcare expenditure</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <div class="chart-container">
+                                <h3 class="chart-title">Generic Medicine Adoption Factors</h3>
+                                <div class="chart">
+                                    <div class="bar" style="height: 96%;">
+                                        <div class="bar-label">Trust Doctor</div>
+                                        <div class="bar-value">96%</div>
+                                    </div>
+                                    <div class="bar green" style="height: 80%;">
+                                        <div class="bar-label">Cost Factor</div>
+                                        <div class="bar-value">85%</div>
+                                    </div>
+                                    <div class="bar" style="height: 47%;">
+                                        <div class="bar-label">Self-Substitute</div>
+                                        <div class="bar-value">46.8%</div>
+                                    </div>
+                                    <div class="bar green" style="height: 75%;">
+                                        <div class="bar-label">Satisfaction</div>
+                                        <div class="bar-value">79.8%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 6: Our Solution - GenMed Finder -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">6</div>
+                </div>
+                
+                <h2 class="slide-title">Our Solution - <span>GenMed Finder</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">What We Do</h3>
+                            <div class="quote">
+                                A web-based platform that instantly identifies affordable generic alternatives for prescribed branded medicines
+                            </div>
+                            
+                            <h3 class="slide-subtitle" style="margin-top: 30px;">How It Works</h3>
+                            <div class="workflow-diagram">
+                                <div class="workflow-steps">
+                                    <div class="workflow-step">
+                                        <div class="step-circle">1</div>
+                                        <div class="step-label">Upload prescription image or enter medicine name</div>
+                                    </div>
+                                    <div class="workflow-step">
+                                        <div class="step-circle green">2</div>
+                                        <div class="step-label">AI-powered composition extraction and matching</div>
+                                    </div>
+                                    <div class="workflow-step">
+                                        <div class="step-circle">3</div>
+                                        <div class="step-label">Real-time scraping of online pharmacy data</div>
+                                    </div>
+                                    <div class="workflow-step">
+                                        <div class="step-circle green">4</div>
+                                        <div class="step-label">Curated list of generic alternatives with price comparison</div>
+                                    </div>
+                                    <div class="workflow-line" id="workflow-line"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Key Features</h3>
+                            <div class="list-container">
+                                <div class="list-item">
+                                    <i class="fas fa-camera"></i>
+                                    <div class="list-text"><strong>Multi-input support:</strong> Upload prescription image or enter text</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-search-dollar"></i>
+                                    <div class="list-text"><strong>Real-time price comparison:</strong> Live updates from multiple sources</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <div class="list-text"><strong>Quality assurance indicators:</strong> Certification and standards displayed</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-calculator"></i>
+                                    <div class="list-text"><strong>Annual savings calculator:</strong> Project your yearly savings</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                    <div class="list-text"><strong>Store location mapping:</strong> Find nearby Jan Aushadhi stores</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <div class="list-text"><strong>Mobile-responsive design:</strong> Works seamlessly on all devices</div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-container" style="margin-top: 20px;">
+                                <div class="placeholder-img">
+                                    <i class="fas fa-laptop-medical"></i>
+                                    <p>GenMed Finder Platform Interface</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 7: Technology Stack & Workflow -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">7</div>
+                </div>
+                
+                <h2 class="slide-title">Technology Stack & <span>Workflow</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Technical Architecture</h3>
+                            
+                            <div class="list-container">
+                                <h3 class="list-title">Frontend</h3>
+                                <div class="list-item">
+                                    <i class="fab fa-react"></i>
+                                    <div class="list-text"><strong>React.js</strong> for responsive UI with real-time data visualization</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <div class="list-text"><strong>Progressive Web App</strong> capabilities for mobile experience</div>
+                                </div>
+                                
+                                <h3 class="list-title" style="margin-top: 20px;">Backend Processing</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-eye"></i>
+                                    <div class="list-text"><strong>OCR</strong> for prescription image processing</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-spider"></i>
+                                    <div class="list-text"><strong>Web scraping engine</strong> for price aggregation</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-cogs"></i>
+                                    <div class="list-text"><strong>Composition matching algorithm</strong> for accurate alternatives</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-database"></i>
+                                    <div class="list-text">Database of <strong>5000+ medicines</strong> with therapeutic categories</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Data Sources</h3>
+                            <div class="stats-container">
+                                <div class="stat-box">
+                                    <div class="stat-value">Jan Aushadhi</div>
+                                    <div class="stat-label">Scheme database with all Pradhan Mantri stores</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">10+ APIs</div>
+                                    <div class="stat-label">Online pharmacy APIs (1mg, PharmEasy, Netmeds)</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">CIMS</div>
+                                    <div class="stat-label">Current Index of Medical Stores database</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">NPPA</div>
+                                    <div class="stat-label">National Pharmaceutical Pricing Authority ceiling prices</div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-container" style="margin-top: 20px; height: 320px;">
+                                <div class="placeholder-img">
+                                    <i class="fas fa-project-diagram"></i>
+                                    <p>Technology Architecture Diagram</p>
+                                    <p style="font-size: 0.9rem; margin-top: 10px;">User Input → Image/Text Processing → Composition Extraction → Database Matching → Web Scraping → Algorithm Ranking → Results Display</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 8: Impact Potential -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">8</div>
+                </div>
+                
+                <h2 class="slide-title">Impact <span>Potential</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">For Consumers</h3>
+                            <div class="list-container">
+                                <div class="list-item">
+                                    <i class="fas fa-rupee-sign"></i>
+                                    <div class="list-text"><strong>Savings:</strong> 80-90% reduction in medicine costs</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <div class="list-text"><strong>Awareness:</strong> Informed decision-making about generics</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-link"></i>
+                                    <div class="list-text"><strong>Access:</strong> Direct links to purchase or locate stores</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-handshake"></i>
+                                    <div class="list-text"><strong>Trust:</strong> Quality certification display builds confidence</div>
+                                </div>
+                            </div>
+                            
+                            <h3 class="slide-subtitle" style="margin-top: 30px;">Real Savings Examples</h3>
+                            <div class="stats-container">
+                                <div class="stat-box">
+                                    <div class="stat-value">94.4%</div>
+                                    <div class="stat-label">Savings on Paracetamol 650mg: ₹45 → ₹2.50</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">2-25x</div>
+                                    <div class="stat-label">Cheaper for Atorvastatin 10mg as generic</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">₹60k-1.3L</div>
+                                    <div class="stat-label">Savings on Cancer treatment (TAC regimen)</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">₹5k-30k</div>
+                                    <div class="stat-label">Annual household savings for chronic disease patients</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Social Impact</h3>
+                            <div class="list-container">
+                                <div class="list-item">
+                                    <i class="fas fa-ban"></i>
+                                    <div class="list-text">Reduce medicine-induced poverty</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-heartbeat"></i>
+                                    <div class="list-text">Improve treatment adherence (due to affordability)</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-flag"></i>
+                                    <div class="list-text">Support government Jan Aushadhi initiative</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-eye"></i>
+                                    <div class="list-text">Build trust in generic medicines through transparency</div>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-container" style="margin-top: 20px;">
+                                <h3 class="chart-title">Potential Annual Savings per Household</h3>
+                                <div class="chart">
+                                    <div class="bar" style="height: 100%;">
+                                        <div class="bar-label">Diabetes</div>
+                                        <div class="bar-value">₹18,240</div>
+                                    </div>
+                                    <div class="bar green" style="height: 85%;">
+                                        <div class="bar-label">Hypertension</div>
+                                        <div class="bar-value">₹15,600</div>
+                                    </div>
+                                    <div class="bar" style="height: 65%;">
+                                        <div class="bar-label">Arthritis</div>
+                                        <div class="bar-value">₹11,700</div>
+                                    </div>
+                                    <div class="bar green" style="height: 40%;">
+                                        <div class="bar-label">Seasonal</div>
+                                        <div class="bar-value">₹5,000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 9: Competitive Advantage -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">9</div>
+                </div>
+                
+                <h2 class="slide-title">Competitive <span>Advantage</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Current Gap in Market</h3>
+                            <div class="list-container">
+                                <div class="list-item">
+                                    <i class="fas fa-truck"></i>
+                                    <div class="list-text">Existing pharmacy apps focus on <strong>delivery, not education</strong></div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-search-minus"></i>
+                                    <div class="list-text">No dedicated platform for <strong>generic alternative discovery</strong></div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-balance-scale"></i>
+                                    <div class="list-text">Doctor-patient <strong>information asymmetry</strong> persists</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <div class="list-text">Price comparison tools exist but <strong>lack composition matching</strong></div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-container" style="margin-top: 20px;">
+                                <div class="placeholder-img">
+                                    <i class="fas fa-chart-pie"></i>
+                                    <p>Market Gap Analysis</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Our Unique Value Propositions</h3>
+                            <div class="stats-container">
+                                <div class="stat-box green">
+                                    <div class="stat-value">#1</div>
+                                    <div class="stat-label"><strong>Education-First Approach:</strong> Not just selling, but educating about generics</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">#2</div>
+                                    <div class="stat-label"><strong>Prescription Intelligence:</strong> AI-powered composition extraction</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">#3</div>
+                                    <div class="stat-label"><strong>Real-Time Aggregation:</strong> Live price updates from multiple sources</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">#4</div>
+                                    <div class="stat-label"><strong>Quality Assurance:</strong> Certification and standards prominently displayed</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">#5</div>
+                                    <div class="stat-label"><strong>Accessibility Focus:</strong> Jan Aushadhi store integration</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">#6</div>
+                                    <div class="stat-label"><strong>Trust Building:</strong> Research-backed information about generic equivalence</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 10: Business Model & Sustainability -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">10</div>
+                </div>
+                
+                <h2 class="slide-title">Business Model & <span>Sustainability</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Revenue Streams</h3>
+                            <div class="list-container">
+                                <div class="list-item">
+                                    <i class="fas fa-handshake"></i>
+                                    <div class="list-text"><strong>Affiliate Commissions:</strong> From online pharmacies (3-5%)</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-crown"></i>
+                                    <div class="list-text"><strong>Premium Features:</strong> Advanced analytics for chronic disease patients</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-building"></i>
+                                    <div class="list-text"><strong>B2B Partnerships:</strong> Corporate wellness programs</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-landmark"></i>
+                                    <div class="list-text"><strong>Government Collaboration:</strong> Jan Aushadhi scheme promotion incentives</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-ad"></i>
+                                    <div class="list-text"><strong>Advertisement:</strong> Targeted health content (generic manufacturers only)</div>
+                                </div>
+                            </div>
+                            
+                            <h3 class="slide-subtitle" style="margin-top: 30px;">Cost Structure</h3>
+                            <div class="stats-container">
+                                <div class="stat-box">
+                                    <div class="stat-value">40%</div>
+                                    <div class="stat-label">Platform development & maintenance</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">25%</div>
+                                    <div class="stat-label">Web scraping infrastructure</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">20%</div>
+                                    <div class="stat-label">Marketing & user acquisition</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">15%</div>
+                                    <div class="stat-label">Partnership development</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Growth Strategy</h3>
+                            <div class="chart-container" style="height: 350px;">
+                                <div class="chart" style="align-items: flex-end; justify-content: space-around;">
+                                    <div class="bar" style="height: 20%;">
+                                        <div class="bar-label">Phase 1</div>
+                                        <div class="bar-value">10k</div>
+                                        <div style="position: absolute; bottom: -45px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.8rem;">Bangalore<br>3 months</div>
+                                    </div>
+                                    <div class="bar green" style="height: 40%;">
+                                        <div class="bar-label">Phase 2</div>
+                                        <div class="bar-value">50k</div>
+                                        <div style="position: absolute; bottom: -45px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.8rem;">Karnataka<br>6 months</div>
+                                    </div>
+                                    <div class="bar" style="height: 70%;">
+                                        <div class="bar-label">Phase 3</div>
+                                        <div class="bar-value">200k</div>
+                                        <div style="position: absolute; bottom: -45px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.8rem;">South India<br>12 months</div>
+                                    </div>
+                                    <div class="bar green" style="height: 100%;">
+                                        <div class="bar-label">Phase 4</div>
+                                        <div class="bar-value">1M+</div>
+                                        <div style="position: absolute; bottom: -45px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.8rem;">Pan-India<br>24 months</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="highlight-box" style="margin-top: 20px;">
+                                <div class="highlight-text">Break-even target: Month 18 with projected 200,000+ active users</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 11: Implementation Roadmap -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">11</div>
+                </div>
+                
+                <h2 class="slide-title">Implementation <span>Roadmap</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Month 1-2: MVP Development</h3>
+                            <div class="list-container">
+                                <div class="list-item">
+                                    <i class="fas fa-rocket"></i>
+                                    <div class="list-text">Core web platform with manual data entry</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-cogs"></i>
+                                    <div class="list-text">Basic composition matching algorithm</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-plug"></i>
+                                    <div class="list-text">Integration with 3 online pharmacy APIs</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-database"></i>
+                                    <div class="list-text">Jan Aushadhi database integration</div>
+                                </div>
+                            </div>
+                            
+                            <h3 class="slide-subtitle" style="margin-top: 30px;">Month 3-4: AI Enhancement</h3>
+                            <div class="list-container">
+                                <div class="list-item">
+                                    <i class="fas fa-eye"></i>
+                                    <div class="list-text">OCR implementation for prescription images</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-robot"></i>
+                                    <div class="list-text">Advanced web scraping automation</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-comments"></i>
+                                    <div class="list-text">User feedback system implementation</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <div class="list-text">Mobile optimization and PWA features</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Month 5-6: Scale & Partnerships</h3>
+                            <div class="list-container">
+                                <div class="list-item">
+                                    <i class="fas fa-handshake"></i>
+                                    <div class="list-text">Partner with 5 pharmacy chains</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-users"></i>
+                                    <div class="list-text">Collaborate with patient advocacy groups</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-bullhorn"></i>
+                                    <div class="list-text">Launch awareness campaigns in Bangalore</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-user-md"></i>
+                                    <div class="list-text">Doctor engagement program initiation</div>
+                                </div>
+                            </div>
+                            
+                            <h3 class="slide-subtitle" style="margin-top: 30px;">Month 7-12: Expansion</h3>
+                            <div class="list-container">
+                                <div class="list-item">
+                                    <i class="fas fa-language"></i>
+                                    <div class="list-text">Multi-language support (Hindi, Kannada, Tamil)</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-expand-arrows-alt"></i>
+                                    <div class="list-text">Regional expansion to 5 South Indian states</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <div class="list-text">Advanced analytics features for chronic patients</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <div class="list-text">Insurance integration for cashless claims</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-row">
+                        <div class="content-col">
+                            <div class="image-container">
+                                <div class="placeholder-img">
+                                    <i class="fas fa-road"></i>
+                                    <p>Implementation Timeline Visualization</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <div class="highlight-box">
+                                <div class="highlight-text">By end of Year 1: Target 50,000+ active users with ₹5 crore+ total savings generated for users</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 12: Addressing Challenges -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">12</div>
+                </div>
+                
+                <h2 class="slide-title">Addressing <span>Challenges</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <div class="list-container">
+                                <h3 class="list-title">Challenge 1: User Adoption</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-qrcode"></i>
+                                    <div class="list-text"><strong>Solution:</strong> Partner with pharmacies for in-store QR codes, incentivize first-time users</div>
+                                </div>
+                                
+                                <h3 class="list-title" style="margin-top: 20px;">Challenge 2: Data Accuracy</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-check-double"></i>
+                                    <div class="list-text"><strong>Solution:</strong> Multiple data source verification, community reporting, regular updates</div>
+                                </div>
+                                
+                                <h3 class="list-title" style="margin-top: 20px;">Challenge 3: Doctor Resistance</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <div class="list-text"><strong>Solution:</strong> CME programs highlighting cost savings, evidence-based quality data</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <div class="list-container">
+                                <h3 class="list-title">Challenge 4: Trust in Generics</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-certificate"></i>
+                                    <div class="list-text"><strong>Solution:</strong> Transparent quality certification display, user testimonials, research citations</div>
+                                </div>
+                                
+                                <h3 class="list-title" style="margin-top: 20px;">Challenge 5: Technology Access</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-sms"></i>
+                                    <div class="list-text"><strong>Solution:</strong> SMS-based query system for low smartphone areas, pharmacy kiosk partnerships</div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-container" style="margin-top: 20px;">
+                                <div class="placeholder-img">
+                                    <i class="fas fa-tasks"></i>
+                                    <p>Challenge Mitigation Strategy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-row">
+                        <div class="content-col">
+                            <div class="stats-container">
+                                <div class="stat-box green">
+                                    <div class="stat-value">QR Codes</div>
+                                    <div class="list-text">Pharmacy partnerships for in-store access points</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">3-Source</div>
+                                    <div class="list-text">Data verification from multiple sources for accuracy</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">CME Programs</div>
+                                    <div class="list-text">Doctor engagement through education programs</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">SMS System</div>
+                                    <div class="list-text">Accessibility for low smartphone penetration areas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 13: Success Metrics & KPIs -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">13</div>
+                </div>
+                
+                <h2 class="slide-title">Success Metrics & <span>KPIs</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">User Metrics</h3>
+                            <div class="stats-container">
+                                <div class="stat-box">
+                                    <div class="stat-value">50,000+</div>
+                                    <div class="stat-label">Monthly active users (Year 1 target)</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">1,000+</div>
+                                    <div class="stat-label">Prescription uploads/searches per day</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">25%</div>
+                                    <div class="stat-label">Conversion rate (search to purchase)</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">40%</div>
+                                    <div class="stat-label">User retention rate (Month 6+)</div>
+                                </div>
+                            </div>
+                            
+                            <h3 class="slide-subtitle" style="margin-top: 30px;">Impact Metrics</h3>
+                            <div class="stats-container">
+                                <div class="stat-box">
+                                    <div class="stat-value">₹5 Cr+</div>
+                                    <div class="stat-label">Total savings generated for users (Year 1)</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">15%</div>
+                                    <div class="stat-label">Generic medicine adoption rate increase</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">5,000+</div>
+                                    <div class="stat-label">Jan Aushadhi store visits attributed to platform</div>
+                                </div>
+                                <div class="stat-box green">
+                                    <div class="stat-value">4.5/5</div>
+                                    <div class="stat-label">Target patient satisfaction score</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Business Metrics</h3>
+                            <div class="chart-container" style="height: 250px;">
+                                <h3 class="chart-title">Revenue Projection (Year 1-3)</h3>
+                                <div class="chart">
+                                    <div class="bar" style="height: 30%;">
+                                        <div class="bar-label">Year 1</div>
+                                        <div class="bar-value">₹25L</div>
+                                    </div>
+                                    <div class="bar green" style="height: 65%;">
+                                        <div class="bar-label">Year 2</div>
+                                        <div class="bar-value">₹1.2Cr</div>
+                                    </div>
+                                    <div class="bar" style="height: 100%;">
+                                        <div class="bar-label">Year 3</div>
+                                        <div class="bar-value">₹3.5Cr</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-container" style="margin-top: 20px; height: 250px;">
+                                <h3 class="chart-title">User Growth Projection</h3>
+                                <div class="chart">
+                                    <div class="bar" style="height: 20%;">
+                                        <div class="bar-label">Q1</div>
+                                        <div class="bar-value">10k</div>
+                                    </div>
+                                    <div class="bar green" style="height: 35%;">
+                                        <div class="bar-label">Q2</div>
+                                        <div class="bar-value">25k</div>
+                                    </div>
+                                    <div class="bar" style="height: 60%;">
+                                        <div class="bar-label">Q3</div>
+                                        <div class="bar-value">50k</div>
+                                    </div>
+                                    <div class="bar green" style="height: 100%;">
+                                        <div class="bar-label">Q4</div>
+                                        <div class="bar-value">75k</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-row">
+                        <div class="content-col">
+                            <div class="highlight-box">
+                                <div class="highlight-text">Break-even target: Month 18 with 200,000+ active users and platform sustainability index > 1.2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 14: Research Foundation -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">14</div>
+                </div>
+                
+                <h2 class="slide-title">Research <span>Foundation</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <div class="quote">
+                                Our solution is grounded in extensive academic research and evidence-based approach to ensure credibility and effectiveness.
+                            </div>
+                            
+                            <h3 class="slide-subtitle" style="margin-top: 30px;">Evidence-Based Approach</h3>
+                            <div class="list-container">
+                                <div class="list-item">
+                                    <i class="fas fa-flask"></i>
+                                    <div class="list-text"><strong>Quality Assurance</strong> (Singal et al., 2011; Aivalli et al., 2018): Generic and branded medicines from same manufacturers show identical quality</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <div class="list-text"><strong>Cost Savings Potential</strong> (Sovani et al., 2025; George & Baliga, 2021): 80-85% cost reduction validated across multiple studies</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-brain"></i>
+                                    <div class="list-text"><strong>Behavioral Insights</strong> (Tripathi & Bhattacharya, 2018; Dongre et al., 2010): Knowledge gap is primary barrier, not quality concerns</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-gavel"></i>
+                                    <div class="list-text"><strong>Policy Support</strong> (Mehra et al., 2024; Dixit et al., 2018): Government actively promoting generic medicines with regulatory framework</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <div class="image-container" style="height: 400px;">
+                                <div class="placeholder-img">
+                                    <i class="fas fa-book-open"></i>
+                                    <p>Research-Backed Evidence</p>
+                                    <div style="text-align: left; padding: 20px; font-size: 0.9rem;">
+                                        <p><strong>Key Findings from Research:</strong></p>
+                                        <p>• 97% of medicines meet statutory quality standards (both generic and branded)</p>
+                                        <p>• Laboratory testing confirms identical bioavailability</p>
+                                        <p>• Patients respond positively when properly informed about generics</p>
+                                        <p>• Government policies actively support generic substitution</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 15: Call to Action -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">15</div>
+                </div>
+                
+                <h2 class="slide-title">Call to <span>Action</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Join Us in Transforming Healthcare Affordability</h3>
+                            
+                            <div class="list-container">
+                                <h3 class="list-title">For Users</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-heart"></i>
+                                    <div class="list-text">Access affordable healthcare without compromising quality</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <div class="list-text">Make informed medicine choices with transparent information</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-rupee-sign"></i>
+                                    <div class="list-text">Save thousands annually on medicine expenditure</div>
+                                </div>
+                                
+                                <h3 class="list-title" style="margin-top: 20px;">For Partners</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-expand-arrows-alt"></i>
+                                    <div class="list-text">Expand generic medicine reach to underserved populations</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-handshake"></i>
+                                    <div class="list-text">Support social impact mission with measurable outcomes</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-users"></i>
+                                    <div class="list-text">Grow customer base through ethical healthcare practices</div>
+                                </div>
+                                
+                                <h3 class="list-title" style="margin-top: 20px;">For Investors</h3>
+                                <div class="list-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <div class="list-text">Scalable technology platform with large addressable market</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-balance-scale"></i>
+                                    <div class="list-text">Social impact + financial returns (67% of healthcare OOP market)</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <div class="image-container" style="height: 500px;">
+                                <div class="placeholder-img">
+                                    <i class="fas fa-bullseye"></i>
+                                    <p style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px;">Our Vision</p>
+                                    <div class="quote" style="background: transparent; box-shadow: none; padding: 0; font-size: 1.4rem;">
+                                        "Making affordable healthcare accessible to every Indian family through technology and transparency"
+                                    </div>
+                                    <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 20px; align-items: center;">
+                                        <div class="stat-box" style="width: 80%;">
+                                            <div class="stat-value">67% Market</div>
+                                            <div class="stat-label">Of total healthcare OOP spending on medicines</div>
+                                        </div>
+                                        <div class="stat-box green" style="width: 80%;">
+                                            <div class="stat-value">1.3B+</div>
+                                            <div class="stat-label">Indians who can benefit from affordable medicines</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 16: Contact & Demo -->
+            <div class="slide">
+                <div class="slide-header">
+                    <div class="slide-logo">GenMed<span>Finder</span></div>
+                    <div class="slide-number">16</div>
+                </div>
+                
+                <h2 class="slide-title">Contact & <span>Demo</span></h2>
+                
+                <div class="slide-content">
+                    <div class="content-row">
+                        <div class="content-col">
+                            <h3 class="slide-subtitle">Try Our Platform</h3>
+                            
+                            <div class="list-container">
+                                <div class="list-item">
+                                    <i class="fas fa-globe"></i>
+                                    <div class="list-text"><strong>Website:</strong> www.genmedfinder.in (prototype)</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <div class="list-text"><strong>Email:</strong> team@genmedfinder.in</div>
+                                </div>
+                                <div class="list-item">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <div class="list-text"><strong>Mobile App:</strong> Available on iOS and Android</div>
+                                </div>
+                            </div>
+                            
+                            <div class="highlight-box" style="margin-top: 30px;">
+                                <div class="highlight-text">Live Demo Available - Scan QR code to try the platform</div>
+                            </div>
+                            
+                            <div class="image-container" style="margin-top: 30px; height: 250px;">
+                                <div class="placeholder-img">
+                                    <i class="fas fa-qrcode"></i>
+                                    <p>Scan QR Code for Demo</p>
+                                    <p style="font-size: 0.9rem;">Point your camera at this code to access the demo</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-col">
+                            <div class="image-container" style="height: 500px;">
+                                <div class="placeholder-img">
+                                    <i class="fas fa-comments"></i>
+                                    <p style="font-size: 1.5rem; font-weight: 700; margin-bottom: 30px;">Thank You</p>
+                                    <div class="quote" style="background: transparent; box-shadow: none; padding: 0; font-size: 1.3rem;">
+                                        Questions & Feedback Welcome
+                                    </div>
+                                    <div style="margin-top: 40px; display: flex; gap: 20px; justify-content: center;">
+                                        <div class="stat-box" style="width: 45%;">
+                                            <div class="stat-value">Team</div>
+                                            <div class="stat-label">MedTech Innovators</div>
+                                        </div>
+                                        <div class="stat-box green" style="width: 45%;">
+                                            <div class="stat-value">Ideathon</div>
+                                            <div class="stat-label">National Healthcare 2023</div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 40px; font-size: 0.9rem; color: var(--gray-text);">
+                                        <p><strong>Presentation Credits:</strong></p>
+                                        <p>Research Data: ICMR, NPPA, WHO</p>
+                                        <p>Design: Professional Healthcare Tech PPT</p>
+                                        <p>Date: October 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation buttons -->
+        <div class="navigation">
+            <div class="nav-btn" id="prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="nav-btn" id="next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+        
+        <!-- Slide indicators -->
+        <div class="slide-indicators" id="slide-indicators">
+            <!-- Indicators will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.getElementById('slides-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const slideIndicators = document.getElementById('slide-indicators');
+            const workflowLine = document.getElementById('workflow-line');
+            
+            const totalSlides = 16;
+            let currentSlide = 0;
+            
+            // Create slide indicators
+            for (let i = 0; i < totalSlides; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator';
+                if (i === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => goToSlide(i));
+                slideIndicators.appendChild(indicator);
+            }
+            
+            // Update workflow line animation
+            function updateWorkflowLine() {
+                if (workflowLine) {
+                    // Animate the workflow line on slide 6
+                    if (currentSlide === 5) {
+                        setTimeout(() => {
+                            workflowLine.style.transition = 'width 2s ease';
+                            workflowLine.style.width = '100%';
+                        }, 500);
+                    } else {
+                        workflowLine.style.width = '0';
+                    }
+                }
+            }
+            
+            // Go to specific slide
+            function goToSlide(slideIndex) {
+                if (slideIndex < 0 || slideIndex >= totalSlides) return;
+                
+                currentSlide = slideIndex;
+                slidesContainer.style.transform = `translateX(-${currentSlide * 100}vw)`;
+                
+                // Update indicators
+                document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                    if (index === currentSlide) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+                
+                updateWorkflowLine();
+            }
+            
+            // Next slide
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    goToSlide(currentSlide + 1);
+                }
+            });
+            
+            // Previous slide
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    nextBtn.click();
+                } else if (e.key === 'ArrowLeft') {
+                    prevBtn.click();
+                }
+            });
+            
+            // Swipe support for touch devices
+            let startX = 0;
+            let endX = 0;
+            
+            slidesContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+            
+            slidesContainer.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                const diff = startX - endX;
+                
+                // Minimum swipe distance
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        // Swipe left - next slide
+                        nextBtn.click();
+                    } else {
+                        // Swipe right - previous slide
+                        prevBtn.click();
+                    }
+                }
+            });
+            
+            // Initialize workflow line animation
+            updateWorkflowLine();
+        });
+    </script>
+</body>
+</html>

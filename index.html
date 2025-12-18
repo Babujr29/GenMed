@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenMed - Your Generic Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Logo -->
+    <div class="bg-logo"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">GenMed</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="consult.html">Consult a Doctor</a></li>
+                    <li><a href="customers.html">Our Customers</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="profile.html" class="profile-link"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Welcome to GenMed</h1>
+            <p class="tagline">Your Generic Assistant</p>
+            <p class="hero-desc">Find affordable generic alternatives to branded medicines with similar composition</p>
+        </section>
+
+        <!-- Action Boxes -->
+        <section class="action-boxes">
+            <div class="box">
+                <div class="box-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <h3>Upload Medicine Pic</h3>
+                <p>Take or upload a photo of your medicine</p>
+                <button class="btn" id="uploadPicBtn">Upload Now</button>
+            </div>
+            <div class="box">
+                <div class="box-icon">
+                    <i class="fas fa-file-prescription"></i>
+                </div>
+                <h3>Upload Prescription</h3>
+                <p>Upload your prescription for analysis</p>
+                <button class="btn" id="uploadPrescriptionBtn">Upload Now</button>
+            </div>
+            <div class="box">
+                <div class="box-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Search for Medicine</h3>
+                <p>Search medicines by name or composition</p>
+                <a href="search.html" class="btn">Search Now</a>
+            </div>
+        </section>
+
+       <!-- Medicine Recommendations -->
+<section class="recommendations">
+    <h2>Here are some affordable solutions for everyday use</h2>
+    <div class="scroll-container">
+        <div class="problem-cards">
+            <!-- Problem Card 1 -->
+            <div class="problem-card">
+                <div class="problem-header">
+                    <h4>Fever, Headache, Body Pain</h4>
+                    <span class="price-range">Starting from ₹15</span>
+                    <button class="expand-btn"><i class="fas fa-chevron-down"></i></button>
+                </div>
+                <div class="medicine-details">
+                    <!-- Medicine Item 1 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="paracetamol.jpg" alt="Paracetamol">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Paracetamol 500mg</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">10 tablets</span>
+                                    <span class="strip-type">strip</span>
+                                </div>
+                                <div class="medicine-price">₹15</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <!-- Medicine Item 2 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="dolo.webp" alt="Dolo 650">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Dolo 650mg</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">15 tablets</span>
+                                    <span class="strip-type">strip</span>
+                                </div>
+                                <div class="medicine-price">₹25</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        If problem persists, please consult a doctor
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem Card 2 -->
+            <div class="problem-card">
+                <div class="problem-header">
+                    <h4>Allergy, Cold, Itching</h4>
+                    <span class="price-range">Starting from ₹25</span>
+                    <button class="expand-btn"><i class="fas fa-chevron-down"></i></button>
+                </div>
+                <div class="medicine-details">
+                    <!-- Medicine Item 1 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="citrezin.jpg" alt="Cetirizine">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Cetirizine 10mg</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">10 tablets</span>
+                                    <span class="strip-type">strip</span>
+                                </div>
+                                <div class="medicine-price">₹25</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <!-- Medicine Item 2 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="Levocetirizine.jpg" alt="Levocetirizine">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Levocetirizine 5mg</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">10 tablets</span>
+                                    <span class="strip-type">strip</span>
+                                </div>
+                                <div class="medicine-price">₹35</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        If problem persists, please consult a doctor
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem Card 3 -->
+            <div class="problem-card">
+                <div class="problem-header">
+                    <h4>Acidity, Stomach Ulcer</h4>
+                    <span class="price-range">Starting from ₹45</span>
+                    <button class="expand-btn"><i class="fas fa-chevron-down"></i></button>
+                </div>
+                <div class="medicine-details">
+                    <!-- Medicine Item 1 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="Omeprazole.avif" alt="Omeprazole">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Omeprazole 20mg</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">10 capsules</span>
+                                    <span class="strip-type">strip</span>
+                                </div>
+                                <div class="medicine-price">₹45</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <!-- Medicine Item 2 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="Pantoprazole.jpg" alt="Pantoprazole">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Pantoprazole 40mg</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">10 tablets</span>
+                                    <span class="strip-type">strip</span>
+                                </div>
+                                <div class="medicine-price">₹55</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        If problem persists, please consult a doctor
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem Card 4 -->
+            <div class="problem-card">
+                <div class="problem-header">
+                    <h4>Joint Pain, Arthritis</h4>
+                    <span class="price-range">Starting from ₹30</span>
+                    <button class="expand-btn"><i class="fas fa-chevron-down"></i></button>
+                </div>
+                <div class="medicine-details">
+                    <!-- Medicine Item 1 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="Diclofenac.webp" alt="Diclofenac">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Diclofenac 50mg</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">10 tablets</span>
+                                    <span class="strip-type">strip</span>
+                                </div>
+                                <div class="medicine-price">₹30</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <!-- Medicine Item 2 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="Aceclofenac.jpg" alt="Aceclofenac">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Aceclofenac 100mg</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">10 tablets</span>
+                                    <span class="strip-type">strip</span>
+                                </div>
+                                <div class="medicine-price">₹40</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        If problem persists, please consult a doctor
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem Card 5 -->
+            <div class="problem-card">
+                <div class="problem-header">
+                    <h4>Bacterial Infections</h4>
+                    <span class="price-range">Starting from ₹60</span>
+                    <button class="expand-btn"><i class="fas fa-chevron-down"></i></button>
+                </div>
+                <div class="medicine-details">
+                    <!-- Medicine Item 1 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="Amoxicillin.jpg" alt="Amoxicillin">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Amoxicillin 500mg</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">10 capsules</span>
+                                    <span class="strip-type">strip</span>
+                                </div>
+                                <div class="medicine-price">₹60</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <!-- Medicine Item 2 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="Azithromycin.jpg" alt="Azithromycin">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Azithromycin 500mg</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">3 tablets</span>
+                                    <span class="strip-type">strip</span>
+                                </div>
+                                <div class="medicine-price">₹90</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Prescription Required. Consult doctor first
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem Card 6 -->
+            <div class="problem-card">
+                <div class="problem-header">
+                    <h4>Cough and Cold</h4>
+                    <span class="price-range">Starting from ₹20</span>
+                    <button class="expand-btn"><i class="fas fa-chevron-down"></i></button>
+                </div>
+                <div class="medicine-details">
+                    <!-- Medicine Item 1 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="Cough Syrup.webp" alt="Cough Syrup">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Cough Syrup 100ml</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">Bottle</span>
+                                    <span class="strip-type">Alcohol free</span>
+                                </div>
+                                <div class="medicine-price">₹20</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <!-- Medicine Item 2 -->
+                    <div class="medicine-item">
+                        <div class="medicine-left">
+                            <div class="medicine-image">
+                                <img src="Combiflam.jpg" alt="Combiflam">
+                            </div>
+                            <div class="medicine-name-price">
+                                <h5 class="medicine-title">Combiflam</h5>
+                                <div class="medicine-description">
+                                    <span class="tablet-count">10 tablets</span>
+                                    <span class="strip-type">strip</span>
+                                </div>
+                                <div class="medicine-price">₹35</div>
+                            </div>
+                        </div>
+                        <button class="buy-now-btn" onclick="window.open('https://pharmeasy.in', '_blank')">Buy Now</button>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        If problem persists, please consult a doctor
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- FAQ Section -->
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    What are generic medicines?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Generic medicines contain the same active ingredients as branded medicines and are equally effective but cost significantly less.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Are generic medicines safe?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, generic medicines are approved by regulatory authorities and undergo the same rigorous testing as branded medicines.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do you find similar medicines?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We analyze the composition of your medicine and find alternatives with identical or similar active ingredients.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is my prescription data secure?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We use end-to-end encryption and comply with healthcare data privacy regulations to ensure your data remains confidential.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">GenMed</div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="consult.html">Consult Doctor</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="footer-disclaimer">
+                    <p><i class="fas fa-exclamation-circle"></i> Disclaimer: This platform provides information about medicines. Consult a healthcare professional before making any medical decisions.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 GenMed. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

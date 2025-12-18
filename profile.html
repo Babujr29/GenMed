@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - GenMed</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Logo -->
+    <div class="bg-logo"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">GenMed</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="consult.html">Consult a Doctor</a></li>
+                    <li><a href="customers.html">Our Customers</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="profile.html" class="active profile-link"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Profile Page Content -->
+    <main class="container">
+        <div class="page-header">
+            <h1>My Profile</h1>
+            <p class="page-subtitle">Manage your account and view your savings</p>
+        </div>
+
+        <!-- Profile Overview -->
+        <section class="profile-overview">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="profile-info">
+                    <h2>Dakshita Bahal</h2>
+                    <p class="profile-email">dakshita.bahal@example.com</p>
+                    <p class="member-since">Member since: January 2024</p>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn-outline" id="editProfileBtn">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+            </div>
+
+            <!-- Savings Stats -->
+            <div class="savings-stats">
+                <div class="savings-card total">
+                    <div class="savings-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <div class="savings-details">
+                        <div class="savings-amount">₹8,450</div>
+                        <div class="savings-label">Total Saved</div>
+                    </div>
+                </div>
+                <div class="savings-card monthly">
+                    <div class="savings-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="savings-details">
+                        <div class="savings-amount">₹2,150</div>
+                        <div class="savings-label">Monthly Average</div>
+                    </div>
+                </div>
+                <div class="savings-card medicines">
+                    <div class="savings-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <div class="savings-details">
+                        <div class="savings-amount">24</div>
+                        <div class="savings-label">Medicines Found</div>
+                    </div>
+                </div>
+                <div class="savings-card consultations">
+                    <div class="savings-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <div class="savings-details">
+                        <div class="savings-amount">3</div>
+                        <div class="savings-label">Doctor Consultations</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Tabs -->
+        <div class="profile-tabs">
+            <button class="tab-btn active" data-tab="savings">My Savings</button>
+            <button class="tab-btn" data-tab="medicines">My Medicines</button>
+            <button class="tab-btn" data-tab="prescriptions">My Prescriptions</button>
+            <button class="tab-btn" data-tab="settings">Account Settings</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Savings Tab -->
+            <div class="tab-pane active" id="savings-tab">
+                <h3>Savings History</h3>
+                <div class="savings-history">
+                    <div class="saving-item">
+                        <div class="saving-date">May 15, 2024</div>
+                        <div class="saving-details">
+                            <div class="saving-medicine">Metformin 500mg (30 tablets)</div>
+                            <div class="saving-comparison">
+                                <span class="original-price">Branded: ₹450</span>
+                                <i class="fas fa-arrow-right"></i>
+                                <span class="generic-price">Generic: ₹120</span>
+                            </div>
+                        </div>
+                        <div class="saving-amount saved">Saved: ₹330</div>
+                    </div>
+                    <div class="saving-item">
+                        <div class="saving-date">May 10, 2024</div>
+                        <div class="saving-details">
+                            <div class="saving-medicine">Atorvastatin 10mg (30 tablets)</div>
+                            <div class="saving-comparison">
+                                <span class="original-price">Branded: ₹600</span>
+                                <i class="fas fa-arrow-right"></i>
+                                <span class="generic-price">Generic: ₹200</span>
+                            </div>
+                        </div>
+                        <div class="saving-amount saved">Saved: ₹400</div>
+                    </div>
+                    <div class="saving-item">
+                        <div class="saving-date">May 5, 2024</div>
+                        <div class="saving-details">
+                            <div class="saving-medicine">Telmi 40mg (30 tablets)</div>
+                            <div class="saving-comparison">
+                                <span class="original-price">Branded: ₹350</span>
+                                <i class="fas fa-arrow-right"></i>
+                                <span class="generic-price">Generic: ₹150</span>
+                            </div>
+                        </div>
+                        <div class="saving-amount saved">Saved: ₹200</div>
+                    </div>
+                    <div class="saving-item">
+                        <div class="saving-date">April 28, 2024</div>
+                        <div class="saving-details">
+                            <div class="saving-medicine">Montelukast 10mg (10 tablets)</div>
+                            <div class="saving-comparison">
+                                <span class="original-price">Branded: ₹250</span>
+                                <i class="fas fa-arrow-right"></i>
+                                <span class="generic-price">Generic: ₹80</span>
+                            </div>
+                        </div>
+                        <div class="saving-amount saved">Saved: ₹170</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medicines Tab -->
+            <div class="tab-pane" id="medicines-tab">
+                <h3>Recently Searched Medicines</h3>
+                <div class="medicine-list">
+                    <div class="medicine-item">
+                        <div class="medicine-name">Crocin Advance 650mg</div>
+                        <div class="medicine-alternative">Alternative: Paracetamol 650mg</div>
+                        <div class="medicine-savings">Savings: ₹30 per strip</div>
+                        <button class="btn-small" onclick="window.location.href='search.html'">View Again</button>
+                    </div>
+                    <div class="medicine-item">
+                        <div class="medicine-name">Zerodol P</div>
+                        <div class="medicine-alternative">Alternative: Aceclofenac + Paracetamol</div>
+                        <div class="medicine-savings">Savings: ₹45 per strip</div>
+                        <button class="btn-small" onclick="window.location.href='search.html'">View Again</button>
+                    </div>
+                    <div class="medicine-item">
+                        <div class="medicine-name">Azithral 500mg</div>
+                        <div class="medicine-alternative">Alternative: Azithromycin 500mg</div>
+                        <div class="medicine-savings">Savings: ₹120 per strip</div>
+                        <button class="btn-small" onclick="window.location.href='search.html'">View Again</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prescriptions Tab -->
+            <div class="tab-pane" id="prescriptions-tab">
+                <h3>Uploaded Prescriptions</h3>
+                <div class="prescription-list">
+                    <div class="prescription-item">
+                        <div class="prescription-header">
+                            <div class="prescription-doctor">Dr. Sharma - General Physician</div>
+                            <div class="prescription-date">April 15, 2024</div>
+                        </div>
+                        <div class="prescription-medicines">
+                            <div class="prescription-medicine">Metformin 500mg - 2 times daily</div>
+                            <div class="prescription-medicine">Atorvastatin 10mg - 1 time daily</div>
+                            <div class="prescription-medicine">Telmisartan 40mg - 1 time daily</div>
+                        </div>
+                        <div class="prescription-actions">
+                            <button class="btn-small"><i class="fas fa-eye"></i> View</button>
+                            <button class="btn-small"><i class="fas fa-search"></i> Find Alternatives</button>
+                        </div>
+                    </div>
+                    <div class="prescription-item">
+                        <div class="prescription-header">
+                            <div class="prescription-doctor">Dr. Patel - Cardiologist</div>
+                            <div class="prescription-date">March 28, 2024</div>
+                        </div>
+                        <div class="prescription-medicines">
+                            <div class="prescription-medicine">Clopidogrel 75mg - 1 time daily</div>
+                            <div class="prescription-medicine">Aspirin 75mg - 1 time daily</div>
+                        </div>
+                        <div class="prescription-actions">
+                            <button class="btn-small"><i class="fas fa-eye"></i> View</button>
+                            <button class="btn-small"><i class="fas fa-search"></i> Find Alternatives</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="upload-prescription">
+                    <button class="btn">
+                        <i class="fas fa-upload"></i> Upload New Prescription
+                    </button>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-pane" id="settings-tab">
+                <h3>Account Settings</h3>
+                <form class="settings-form">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" value="Rohit Kumar">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" value="rohit.kumar@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" value="+91 9876543210">
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" value="1985-06-15">
+                    </div>
+                    <div class="form-group">
+                        <label for="bloodGroup">Blood Group</label>
+                        <select id="bloodGroup">
+                            <option value="A+">A+</option>
+                            <option value="B+">B+</option>
+                            <option value="O+">O+</option>
+                            <option value="AB+">AB+</option>
+                            <option value="A-">A-</option>
+                            <option value="B-">B-</option>
+                            <option value="O-">O-</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Medical Conditions (Optional)</label>
+                        <div class="conditions">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> Diabetes
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> Hypertension
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox"> Asthma
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox"> Heart Disease
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Notifications</label>
+                        <div class="notifications">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> Email notifications
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> SMS alerts for savings
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox"> New generic medicine alerts
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn">Save Changes</button>
+                        <button type="button" class="btn-outline">Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Back to Home -->
+        <div class="back-home">
+            <a href="index.html" class="btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">GenMed</div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="consult.html">Consult Doctor</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="footer-disclaimer">
+                    <p><i class="fas fa-exclamation-circle"></i> Your health data is encrypted and stored securely.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 GenMed. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHO KILLED RATIONAL MAN? | Behavioral Economics Investigation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0f;
+            color: #f0f0f0;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Background effect */
+        .background-effect {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(120, 10, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(10, 20, 80, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(60, 10, 40, 0.1) 0%, transparent 50%);
+            z-index: -2;
+        }
+
+        .crime-scene-overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.03"><path d="M20,20 L80,80 M80,20 L20,80" stroke="white" stroke-width="1"/></svg>'),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" opacity="0.02"><circle cx="100" cy="100" r="3" fill="white"/></svg>');
+            z-index: -1;
+        }
+
+        /* Presentation container */
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Slide system */
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            z-index: 1;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Slide content styles */
+        .slide-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #ff2e2e;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            line-height: 1.1;
+        }
+
+        .slide-subtitle {
+            font-size: 1.8rem;
+            color: #d0d0d0;
+            margin-bottom: 40px;
+            max-width: 900px;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        .slide-content {
+            font-size: 1.6rem;
+            line-height: 1.8;
+            max-width: 1000px;
+            margin-bottom: 40px;
+        }
+
+        .case-file {
+            font-family: 'Courier New', monospace;
+            background-color: rgba(20, 10, 5, 0.7);
+            border: 2px solid #8b4513;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            max-width: 800px;
+        }
+
+        .case-file-title {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 1px solid #8b4513;
+            padding-bottom: 15px;
+        }
+
+        .case-file-content {
+            font-size: 1.8rem;
+            line-height: 2;
+        }
+
+        .case-file-label {
+            color: #ffa500;
+            font-weight: 700;
+        }
+
+        /* Visual elements */
+        .evidence-box {
+            background-color: rgba(30, 5, 10, 0.7);
+            border-left: 8px solid #8b0000;
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+            max-width: 900px;
+        }
+
+        .evidence-title {
+            font-size: 1.8rem;
+            color: #ff4c4c;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .evidence-title i {
+            margin-right: 15px;
+        }
+
+        .rulebook {
+            background-color: rgba(40, 20, 10, 0.8);
+            border: 3px solid #8b4513;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        }
+
+        .rulebook-title {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .axiom-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .axiom-item {
+            font-size: 2rem;
+            color: #f0f0f0;
+            padding: 15px;
+            background-color: rgba(60, 30, 15, 0.5);
+            border-radius: 5px;
+            border: 1px solid #8b4513;
+        }
+
+        .brain-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .brain-icon {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at 30% 40%, #8b0000, #4a0000);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            box-shadow: 0 0 50px rgba(139, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .fingerprint-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 40px 0;
+        }
+
+        .fingerprint {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            position: relative;
+        }
+
+        .fingerprint-choice {
+            background: radial-gradient(circle, #8b0000, #4a0000);
+            border: 3px solid #ff4c4c;
+        }
+
+        .fingerprint-experience {
+            background: radial-gradient(circle, #00008b, #00004a);
+            border: 3px solid #4c4cff;
+        }
+
+        .fingerprint-memory {
+            background: radial-gradient(circle, #008b00, #004a00);
+            border: 3px solid #4cff4c;
+        }
+
+        .fingerprint-label {
+            position: absolute;
+            bottom: -40px;
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .not-equal {
+            font-size: 4rem;
+            color: #ff2e2e;
+            align-self: center;
+            margin: 0 20px;
+        }
+
+        .bias-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            max-width: 900px;
+            margin: 30px 0;
+        }
+
+        .bias-item {
+            background-color: rgba(40, 10, 20, 0.7);
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid #8b0000;
+            text-align: center;
+        }
+
+        .bias-name {
+            font-size: 1.8rem;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .bias-desc {
+            font-size: 1.3rem;
+            color: #d0d0d0;
+        }
+
+        .policy-evidence {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+            max-width: 1000px;
+        }
+
+        .policy-item {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(20, 20, 40, 0.7);
+            padding: 25px;
+            border-radius: 8px;
+            border-top: 5px solid #4c4cff;
+        }
+
+        .policy-title {
+            font-size: 1.6rem;
+            color: #6b8cff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .pill-comparison {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 40px 0;
+        }
+
+        .pill {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+        }
+
+        .pill-cheap {
+            background: radial-gradient(circle, #555, #222);
+            border: 5px solid #888;
+        }
+
+        .pill-expensive {
+            background: radial-gradient(circle, #ffd700, #b8860b);
+            border: 5px solid #ffed4c;
+        }
+
+        .pill-price {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .pill-label {
+            font-size: 1.3rem;
+        }
+
+        .equals {
+            align-self: center;
+            font-size: 3rem;
+            color: #aaa;
+        }
+
+        .voting-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 40px 0;
+        }
+
+        .voting-option {
+            background-color: rgba(30, 10, 20, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #8b0000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .voting-option:hover {
+            background-color: rgba(60, 15, 25, 0.9);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(139, 0, 0, 0.4);
+        }
+
+        .voting-option.selected {
+            background-color: rgba(0, 60, 0, 0.8);
+            border-color: #00cc00;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
+        }
+
+        .option-title {
+            font-size: 1.8rem;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .option-desc {
+            font-size: 1.3rem;
+            color: #d0d0d0;
+        }
+
+        /* Final reveal */
+        .final-reveal {
+            text-align: center;
+            align-items: center;
+        }
+
+        .final-title {
+            font-size: 5rem;
+            color: #ff2e2e;
+            margin-bottom: 40px;
+            text-shadow: 0 0 30px rgba(255, 0, 0, 0.7);
+            animation: pulse 2s infinite;
+        }
+
+        .final-statement {
+            font-size: 2.5rem;
+            color: #f0f0f0;
+            margin-bottom: 50px;
+            max-width: 1000px;
+            line-height: 1.4;
+        }
+
+        .assumption-box {
+            background-color: rgba(30, 30, 60, 0.8);
+            padding: 50px;
+            border-radius: 15px;
+            border: 5px solid #4c4cff;
+            max-width: 900px;
+            margin-top: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .assumption-text {
+            font-size: 3rem;
+            color: #6b8cff;
+            font-weight: 700;
+        }
+
+        .ending-box {
+            background: linear-gradient(135deg, rgba(10, 30, 60, 0.9), rgba(30, 10, 40, 0.9));
+            padding: 60px;
+            border-radius: 15px;
+            max-width: 1000px;
+            text-align: center;
+            border: 3px solid #6b8cff;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .ending-title {
+            font-size: 3.5rem;
+            color: #6b8cff;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .ending-subtitle {
+            font-size: 2rem;
+            color: #d0d0ff;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .ending-quote {
+            font-size: 1.8rem;
+            color: #ffd700;
+            font-style: italic;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #6b8cff;
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-button {
+            background-color: rgba(40, 5, 10, 0.8);
+            color: #ff6b6b;
+            border: 2px solid #8b0000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-button:hover {
+            background-color: #8b0000;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(139, 0, 0, 0.4);
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            font-size: 1.2rem;
+            color: #aaa;
+            background-color: rgba(20, 5, 5, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid #4a0000;
+        }
+
+        /* Timer */
+        .timer-container {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background-color: rgba(20, 5, 5, 0.8);
+            border: 2px solid #8b0000;
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 100;
+            text-align: center;
+            min-width: 150px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .timer-label {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .timer {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff2e2e;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .slide {
+                padding: 40px 60px;
+            }
+            
+            .slide-title {
+                font-size: 3.5rem;
+            }
+            
+            .fingerprint-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 60px;
+            }
+            
+            .not-equal {
+                transform: rotate(90deg);
+                margin: 20px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px 40px;
+            }
+            
+            .slide-title {
+                font-size: 2.8rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .slide-content {
+                font-size: 1.4rem;
+            }
+            
+            .bias-grid, .voting-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-controls {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .nav-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background effects -->
+    <div class="background-effect"></div>
+    <div class="crime-scene-overlay"></div>
+
+    <!-- Timer -->
+    <div class="timer-container">
+        <div class="timer-label">INVESTIGATION TIMER</div>
+        <div class="timer" id="timer">15:00</div>
+    </div>
+
+    <!-- Slide counter -->
+    <div class="slide-counter">
+        Slide <span id="currentSlide">1</span> of <span id="totalSlides">19</span>
+    </div>
+
+    <!-- Navigation controls -->
+    <div class="nav-controls">
+        <div class="nav-button" id="prevBtn">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="nav-button" id="nextBtn">
+            <i class="fas fa-arrow-right"></i>
+        </div>
+    </div>
+
+    <!-- SLIDE 1: TITLE SLIDE -->
+    <div class="slide active" id="slide1">
+        <h1 class="slide-title">WHO KILLED<br>RATIONAL MAN?</h1>
+        <div class="slide-subtitle">A Behavioral Economics Investigation</div>
+    </div>
+
+    <!-- SLIDE 2: CASE FILE -->
+    <div class="slide" id="slide2">
+        <div class="case-file">
+            <div class="case-file-title">CASE FILE #001</div>
+            <div class="case-file-content">
+                <p><span class="case-file-label">VICTIM:</span> Rational Economic Man</p>
+                <p><span class="case-file-label">STATUS:</span> Deceased</p>
+                <p><span class="case-file-label">TIME OF DISCOVERY:</span> Present Day</p>
+                <p><span class="case-file-label">CASE STATUS:</span> Active Investigation</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: VICTIM PROFILE -->
+    <div class="slide" id="slide3">
+        <h1 class="slide-title">VICTIM PROFILE</h1>
+        <div class="evidence-box">
+            <div class="evidence-title">
+                <i class="fas fa-user-tie"></i> STANDARD RATIONAL CHOICE MODEL
+            </div>
+            <div class="slide-content">
+                <p>• Fully rational</p>
+                <p>• Stable preferences</p>
+                <p>• Utility maximizer</p>
+                <p>• Emotionless</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: CRIME SCENE EVIDENCE -->
+    <div class="slide" id="slide4">
+        <h1 class="slide-title">CRIME SCENE EVIDENCE</h1>
+        <div class="slide-content">
+            <p>Found next to the body:</p>
+        </div>
+        <div class="rulebook">
+            <div class="rulebook-title">A RULEBOOK</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: THE RULEBOOK -->
+    <div class="slide" id="slide5">
+        <h1 class="slide-title">THE RULEBOOK</h1>
+        <div class="rulebook">
+            <div class="rulebook-title">AXIOMS OF RATIONALITY</div>
+            <div class="axiom-list">
+                <div class="axiom-item">Completeness</div>
+                <div class="axiom-item">Transitivity</div>
+                <div class="axiom-item">Consistency</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: FIRST DOUBT -->
+    <div class="slide" id="slide6">
+        <h1 class="slide-title">PROBLEM</h1>
+        <div style="text-align: center; margin-top: 100px;">
+            <div style="font-size: 4rem; color: #ff2e2e; margin-bottom: 30px;">Axioms ≠ Reality</div>
+            <div class="slide-content" style="max-width: 800px; margin: 0 auto;">
+                According to these rules, people should never contradict themselves...
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: MOTIVE QUESTION -->
+    <div class="slide" id="slide7">
+        <h1 class="slide-title">KEY QUESTION</h1>
+        <div style="text-align: center; margin-top: 100px;">
+            <div style="font-size: 3.5rem; color: #ff6b6b; margin-bottom: 50px;">
+                Why do humans<br>violate rationality?
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: THE WEAPON -->
+    <div class="slide" id="slide8">
+        <h1 class="slide-title">THE WEAPON</h1>
+        <div class="brain-diagram">
+            <div class="brain-icon">HUMAN<br>BRAIN</div>
+        </div>
+        <div class="evidence-box">
+            <div class="evidence-title">
+                <i class="fas fa-brain"></i> FORENSIC ANALYSIS
+            </div>
+            <div class="slide-content">
+                <p>The brain evolved for <span style="color: #ff6b6b;">survival</span>, not for optimization.</p>
+                <p><span style="color: #ff6b6b;">Fear, loss, and emotion</span> act faster than logic.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: NEURO EVIDENCE -->
+    <div class="slide" id="slide9">
+        <h1 class="slide-title">SCIENTIFIC FINDING</h1>
+        <div style="text-align: center; margin-top: 100px;">
+            <div style="font-size: 3rem; color: #ff4c4c; margin-bottom: 20px;">Emotion → Choice</div>
+            <div style="font-size: 3rem; color: #4c4cff; margin-bottom: 50px;">Logic → Justification</div>
+            <div class="slide-content" style="max-width: 800px; margin: 0 auto;">
+                We feel first. Then we explain.
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 10: FINGERPRINTS -->
+    <div class="slide" id="slide10">
+        <h1 class="slide-title">MULTIPLE FINGERPRINTS</h1>
+        <div class="fingerprint-container">
+            <div class="fingerprint fingerprint-choice">
+                CHOICE
+                <div class="fingerprint-label">Decision</div>
+            </div>
+            <div class="not-equal">≠</div>
+            <div class="fingerprint fingerprint-experience">
+                EXPERIENCE
+                <div class="fingerprint-label">Feeling</div>
+            </div>
+            <div class="not-equal">≠</div>
+            <div class="fingerprint fingerprint-memory">
+                MEMORY
+                <div class="fingerprint-label">Recall</div>
+            </div>
+        </div>
+        <div class="slide-content" style="text-align: center; margin-top: 60px;">
+            What people choose, what they feel, and what they remember are not the same.
+        </div>
+    </div>
+
+    <!-- SLIDE 11: UTILITY TYPES -->
+    <div class="slide" id="slide11">
+        <h1 class="slide-title">UTILITY TYPES</h1>
+        <div class="bias-grid">
+            <div class="bias-item">
+                <div class="bias-name">Decision Utility</div>
+                <div class="bias-desc">What we predict we will feel</div>
+            </div>
+            <div class="bias-item">
+                <div class="bias-name">Experienced Utility</div>
+                <div class="bias-desc">What we actually feel</div>
+            </div>
+            <div class="bias-item">
+                <div class="bias-name">Remembered Utility</div>
+                <div class="bias-desc">What we recall feeling</div>
+            </div>
+            <div class="bias-item">
+                <div class="bias-name">Forecast Error</div>
+                <div class="bias-desc">The mismatch between them</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 12: ACCOMPLICES -->
+    <div class="slide" id="slide12">
+        <h1 class="slide-title">ACCOMPLICES IDENTIFIED</h1>
+        <div class="bias-grid">
+            <div class="bias-item">
+                <div class="bias-name">Framing</div>
+                <div class="bias-desc">Choices change based on presentation</div>
+            </div>
+            <div class="bias-item">
+                <div class="bias-name">Anchoring</div>
+                <div class="bias-desc">Relying too heavily on first information</div>
+            </div>
+            <div class="bias-item">
+                <div class="bias-name">Loss Aversion</div>
+                <div class="bias-desc">Losses hurt more than gains please</div>
+            </div>
+            <div class="bias-item">
+                <div class="bias-name">Status Quo Bias</div>
+                <div class="bias-desc">Preferring things to stay the same</div>
+            </div>
+        </div>
+        <div class="evidence-box" style="margin-top: 40px;">
+            <div class="evidence-title">
+                <i class="fas fa-exclamation-triangle"></i> INVESTIGATOR'S NOTE
+            </div>
+            <div class="slide-content">
+                These aren't random mistakes. They are <span style="color: #ff6b6b;">predictable patterns</span>.
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 13: SYSTEM FAILURE -->
+    <div class="slide" id="slide13">
+        <h1 class="slide-title">SYSTEM ALERT</h1>
+        <div style="text-align: center; margin-top: 100px;">
+            <div style="font-size: 4rem; color: #ff2e2e; margin-bottom: 30px;">
+                Same Policy<br>Different Behavior
+            </div>
+            <div class="slide-content" style="max-width: 800px; margin: 0 auto;">
+                Markets, courts, and governments trusted Rational Man.<br>
+                Humans didn't cooperate.
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 14: POLICY EVIDENCE -->
+    <div class="slide" id="slide14">
+        <h1 class="slide-title">POLICY EVIDENCE</h1>
+        <div class="policy-evidence">
+            <div class="policy-item">
+                <div class="policy-title">Bonus > Discount</div>
+                <div class="slide-content">
+                    Framing identical monetary value differently changes behavior
+                </div>
+            </div>
+            <div class="policy-item">
+                <div class="policy-title">Emotion > Justice</div>
+                <div class="slide-content">
+                    Emotional responses override rational legal reasoning
+                </div>
+            </div>
+            <div class="policy-item">
+                <div class="policy-title">1 Lake = 10 Lakes</div>
+                <div class="slide-content">
+                    People value saving 1 known life over 10 statistical lives
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 15: FINAL CLUE -->
+    <div class="slide" id="slide15">
+        <h1 class="slide-title">FINAL CLUE</h1>
+        <div class="pill-comparison">
+            <div class="pill pill-cheap">
+                <div class="pill-price">₹5</div>
+                <div class="pill-label">Pill</div>
+            </div>
+            <div class="equals">=</div>
+            <div class="pill pill-expensive">
+                <div class="pill-price">₹50</div>
+                <div class="pill-label">Pill</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 50px;">
+            <div style="font-size: 2.5rem; color: #ffd700; margin-bottom: 30px;">
+                Same chemical
+            </div>
+            <div class="slide-content" style="max-width: 800px; margin: 0 auto;">
+                The expensive pill works better. Belief changes outcomes.
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 16: FINAL VOTE -->
+    <div class="slide" id="slide16">
+        <h1 class="slide-title">WHO KILLED<br>RATIONAL MAN?</h1>
+        <div class="voting-options">
+            <div class="voting-option" data-option="biases">
+                <div class="option-title">Cognitive Biases</div>
+                <div class="option-desc">Systematic deviations from rationality</div>
+            </div>
+            <div class="voting-option" data-option="brain">
+                <div class="option-title">The Human Brain</div>
+                <div class="option-desc">Evolved for survival, not optimization</div>
+            </div>
+            <div class="voting-option" data-option="policy">
+                <div class="option-title">Bad Policy Design</div>
+                <div class="option-desc">Ignoring psychology in systems</div>
+            </div>
+            <div class="voting-option" data-option="model">
+                <div class="option-title">Saravana</div>
+                <div class="option-desc">He hit the guy with his bike</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <button id="voteButton" style="background-color: #8b0000; color: white; border: none; padding: 20px 50px; font-size: 1.8rem; border-radius: 10px; cursor: pointer;">
+                CAST YOUR VOTE
+            </button>
+        </div>
+    </div>
+
+    <!-- SLIDE 17: THE TWIST -->
+    <div class="slide" id="slide17">
+        <h1 class="slide-title">CASE UPDATE</h1>
+        <div style="text-align: center; margin-top: 150px;">
+            <div style="font-size: 5rem; color: #ff2e2e; margin-bottom: 50px;">
+                No murderer found.
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 18: FINAL REVEAL -->
+    <div class="slide final-reveal" id="slide18">
+        <div class="assumption-box">
+            <div class="assumption-text">HE WAS AN ASSUMPTION</div>
+        </div>
+        <div class="slide-content" style="text-align: center; margin-top: 80px; font-size: 2rem;">
+            <p>We invented him.</p>
+            <p>To simplify humans.</p>
+            <p>And blamed people when they failed.</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 19: ENDING -->
+    <div class="slide final-reveal" id="slide19">
+        <div class="ending-box">
+            <div class="ending-title">BEHAVIORAL ECONOMICS</div>
+            <div class="ending-subtitle">
+                Does not reject economics.<br>
+                It completes it.
+            </div>
+            <div class="ending-quote">
+                "Good policy doesn't correct humans.<br>
+                It designs for them."
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideEl = document.getElementById('currentSlide');
+        const totalSlidesEl = document.getElementById('totalSlides');
+        const timerEl = document.getElementById('timer');
+        const votingOptions = document.querySelectorAll('.voting-option');
+        const voteButton = document.getElementById('voteButton');
+        
+        // Game state
+        let currentSlideIndex = 0;
+        let totalTime = 900; // 15 minutes in seconds
+        let timerInterval;
+        let selectedVote = null;
+        
+        // Initialize
+        function init() {
+            totalSlidesEl.textContent = slides.length;
+            updateSlideCounter();
+            startTimer();
+            setupEventListeners();
+        }
+        
+        // Timer functionality
+        function startTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                if (totalTime > 0) {
+                    totalTime--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(timerInterval);
+                    // Auto-advance to final slide when time's up
+                    if (currentSlideIndex < slides.length - 1) {
+                        goToSlide(slides.length - 1);
+                    }
+                }
+            }, 1000);
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(totalTime / 60);
+            const seconds = totalTime % 60;
+            timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Change color when time is running low
+            if (totalTime < 180) { // 3 minutes left
+                timerEl.style.color = '#ff0000';
+                timerEl.style.animation = 'pulse 1s infinite';
+            } else if (totalTime < 300) { // 5 minutes left
+                timerEl.style.color = '#ff6b6b';
+            }
+        }
+        
+        // Slide navigation
+        function goToSlide(index) {
+            // Validate index
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+            
+            // Hide current slide
+            slides[currentSlideIndex].classList.remove('active');
+            
+            // Show new slide
+            currentSlideIndex = index;
+            slides[currentSlideIndex].classList.add('active');
+            
+            // Update UI
+            updateSlideCounter();
+            
+            // Auto-advance from vote slide after 5 seconds if vote is cast
+            if (currentSlideIndex === 15 && selectedVote) {
+                setTimeout(() => {
+                    goToSlide(16); // Go to twist slide
+                }, 5000);
+            }
+        }
+        
+        function nextSlide() {
+            goToSlide(currentSlideIndex + 1);
+        }
+        
+        function prevSlide() {
+            goToSlide(currentSlideIndex - 1);
+        }
+        
+        function updateSlideCounter() {
+            currentSlideEl.textContent = currentSlideIndex + 1;
+        }
+        
+        // Voting functionality
+        function setupVoting() {
+            votingOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    votingOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    selectedVote = this.getAttribute('data-option');
+                });
+            });
+            
+            voteButton.addEventListener('click', function() {
+                if (selectedVote) {
+                    // Show confirmation
+                    this.textContent = 'VOTE RECORDED';
+                    this.style.backgroundColor = '#006400';
+                    this.disabled = true;
+                    
+                    // Auto-advance after delay
+                    setTimeout(() => {
+                        goToSlide(16); // Go to twist slide
+                    }, 2000);
+                } else {
+                    // No option selected
+                    const originalText = this.textContent;
+                    this.textContent = 'PLEASE SELECT AN OPTION';
+                    this.style.backgroundColor = '#8b0000';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                    }, 1500);
+                }
+            });
+        }
+        
+        // Event listeners
+        function setupEventListeners() {
+            // Navigation
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    prevSlide();
+                }
+            });
+            
+            // Voting
+            setupVoting();
+        }
+        
+        // Initialize the presentation when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
